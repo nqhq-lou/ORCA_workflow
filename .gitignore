@@ -9,5 +9,9 @@ threads/*
 
 
 
+# preserve folders
+!.gitkeep
+
+
 # preserve files
 

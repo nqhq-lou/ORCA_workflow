@@ -4,8 +4,9 @@
 
 ## notice
 
-- This is not built for slurm systems.
-- Orca ccsd(t) nproc should not exceed number of electrons, and this results in more problems.
+- This is not built for slurm or other cluster managing systems.
+- ORCA ccsd(t) `nproc` should not exceed number of electrons
+    - this results in more problems with working on a cluster
 
 
 
@@ -23,6 +24,7 @@
 - split `.inp` files for threads and save to `./threads` folder
 - run ORCA
     - run `script/start_thread.sh`, which lives on `script/single_run.sh`
+        - make sure that run script at `PROJECT_ROOT` folder
     - `.out` files will be placed in `./out` folder
 
 
@@ -34,3 +36,7 @@
     - `finished` indicates the calculation is finished
     - `error` indicates the calculation is failed
 
+
+## more features required:
+
+- parallelization for processing `.inp` files
