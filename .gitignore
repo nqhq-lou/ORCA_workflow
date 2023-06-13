@@ -2,6 +2,7 @@
 xyz/*
 inp/*
 out/*
+logs/*
 threads/*
 .ipynb_checkpoints
 

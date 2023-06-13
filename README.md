@@ -34,9 +34,9 @@
 - there maybe working, finished, error empty files to indicated the current status
     - `working` indicates the calculation is not finished
     - `finished` indicates the calculation is finished
-    - `error` indicates the calculation is failed
-
+    - no such files, indicated should restart the calculation (error or interrupted or not started yet)
 
 ## more features required:
 
 - parallelization for processing `.inp` files
+- `script/check_thread_duplicate.sh` strategy: newline issue
