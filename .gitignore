@@ -1,0 +1,13 @@
+# ignore folders
+xyz/*
+inp/*
+out/*
+threads/*
+.ipynb_checkpoints
+
+# ignore files
+
+
+
+# preserve files
+
