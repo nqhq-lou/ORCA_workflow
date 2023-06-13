@@ -1,5 +1,9 @@
 # ORCA workflow
 
+- convert xyz files to orca input files by Python
+- run orca calculation controlled by bash scripts
+- extract information from orca by Python
+
 
 
 ## notice
@@ -28,6 +32,7 @@
     - `bash ./script/start_all_threads.sh [thread_dir]`
         - make sure that run the script at `PROJECT_ROOT` folder
     - `.out` files will be placed in `./out` folder
+    - checkout `./logs/failed` file and rerun the failed `.inp` files
 - extract information from `.out` files
     - using `./notebooks/extract.ipynb`
     - outputs will be saved in `./notebooks` folder
