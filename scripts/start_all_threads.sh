@@ -7,6 +7,12 @@ cd $PROJECT_ROOT
 
 thread_dname=$1
 
+# check if thread_dname is provided
+if [ -z ${thread_dname} ]; then
+    echo "Please provide thread_dname as the first parameter"
+    exit 1
+fi
+
 #### startup self-check ####
 
 # # check duplicates

@@ -7,7 +7,7 @@ threads/*
 .ipynb_checkpoints
 
 # ignore files
-
+tree.log
 
 
 # preserve folders
