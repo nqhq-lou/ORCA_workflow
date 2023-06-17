@@ -84,10 +84,10 @@ Also I provided the `qm7_xyz.tar` which consists of 7165 xyz files from QM7 data
         - Make sure that run the script at `PROJECT_ROOT` folder
     - `.out` files will be placed in `./out` folder
     - Checkout `./logs/failed` file and rerun the failed `.inp` files
+		- based on the `./logs/failed` file, create new thread dir and files and run `start_all_threads.sh` again
 - Extract information from `.out` files
     - Using `./notebooks/extract.ipynb`
     - Outputs will be saved in `./notebooks` folder
-
 
 
 ## Out folder
