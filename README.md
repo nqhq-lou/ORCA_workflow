@@ -115,7 +115,7 @@ I tested acetaldehyde to find the best cal settings, and here is the result.
 Here `walltime = nproc * runtime`
 
 ### parameters
-
+- test on QM7 dataset
 - SCF affect on SPE: small.
     - `TightSCF` > `VeryTightSCF` > `NormalSCF` > `LooseSCF`
     - just use `TightSCF`
@@ -130,7 +130,7 @@ Here `walltime = nproc * runtime`
 
 ### compare with other softwares
 
-- adopted scheme
+- adopted scheme: `TightSCF`, `NormalPNO`
 	- runtime: 318.646 sec @ 24 nproc
 	- walltime: 7647.504 sec
 
@@ -144,8 +144,8 @@ Here `walltime = nproc * runtime`
 
 - m062x ksdft
 	- restricted dft, default settings
-	- runtime: 108.782867 sec @ 24 nproc
-	- 3 times the runtime
+	- runtime: 108.782867 sec @ 24 nproc, def2qzvpp
+		- ORCA DLPNO-CCSD(T) is 3 times the KSDFT runtime
 
 ||basis|hf_e_tot|ht_runtime|ksdft_e_tot|ksdft_runtime|mock_correlation_energy|
 |---|---|---|---|---|---|---|
@@ -161,10 +161,15 @@ Here `walltime = nproc * runtime`
 	- `%chk=./chkfiles/QM7_00500.chk`
 	- `#p ccsd(T)/aug-cc-pvtz`
 	- restricted cal
-	- walltime: 171.5
-	- runtime: 10752.2
-	- 71% the walltime, while orbital is 4 zeta in ORCA compared to 3 zeta in Gaussian
-
+	- walltime: 171.5 sec
+	- runtime: 10752.2 sec
+	- ORCA @ def2qzvpp
+		- 71% the walltime, while orbital is 4 zeta in ORCA compared to 3 zeta in Gaussian
+	- for same orbital `CC-PVTZ`
+		- walltime: ORCA 2876.064 sec, Gaussian 10752.2 sec
+		- spe: ORCA -153.582908, Gaussian -153.5964995, Gaussian lower
+		- spe difference: 0.0135915 Hartree, 8.53 kcal/mol
+		- correlation energy: ORCA -0.612558, Gaussian -0.623726, Gaussian lower
 ```Python
 {'nproc': 64,
  'mem': '200GB',
@@ -200,6 +205,77 @@ H       0.62986001      0.33136999      0.97585001
 H       2.98791993     -0.88891000      0.31445001
 *
 ```
+
+### test on transient state of C2H6/ethan
+
+- optimized geometry
+```inp
+! HF DLPNO-CCSD(T) DEF2-QZVPP DEF2-QZVPP/C TightSCF NormalPNO UseSym
+%PAL NPROC 18 END
+%MAXCORE 2000
+* xyz 0 1
+C                  0.76185700    0.00002000    0.00006600
+C                 -0.76188000    0.00001500   -0.00002300
+H                 -1.15681000    0.06580600    1.01418600
+H                 -1.15664300    0.84543600   -0.56416600
+H                 -1.15663000   -0.91129100   -0.45012000
+H                  1.15677300    0.91146100    0.44991600
+H                  1.15660800   -0.84559300    0.56411800
+H                  1.15683700   -0.06603300   -1.01419700
+*
+```
+
+- transient state
+```inp
+! HF DLPNO-CCSD(T) DEF2-QZVPP DEF2-QZVPP/C TightSCF NormalPNO UseSym
+%PAL NPROC 18 END
+%MAXCORE 2000
+* xyz 0 1
+C                  0.76838300    0.00004500    0.00002700
+C                 -0.76834300    0.00000400    0.00001800
+H                 -1.17120200   -0.15353700   -1.00035400
+H                 -1.17121000   -0.78954500    0.63317400
+H                 -1.17128100    0.94312200    0.36712400
+H                  1.17105800   -0.78979400    0.63272600
+H                  1.17100400   -0.15340200   -1.00029100
+H                  1.17139100    0.94285800    0.36735300
+*
+```
+
+- DLPNO-CCSD(T) results
+```yaml
+spe_C2H6: -79.698919476598
+spe_C2H6_ts: -79.694505709045
+spe_d: 0.004413767552989611
+```
+
+- Gaussian CCSD(T) results
+```yaml
+setting: '#p ccsd(T)/aug-cc-pvtz'
+spe_C2H6: -79.67991
+spe_C2H6_ts: -79.6754785
+spe_d: 0.0044315
+```
+
+- compare DLPNO-CCSD(T) with gaussian CCSD(T)
+	- 0.0000177 Hartree
+	- 0.0111273 kcal/mol
+
+- m062x results (by PySCF)
+```yaml
+mol:
+	atom: C2H6
+	unit: ang
+	basis: def2qzvpp
+	max_memory: 8000
+spe_C2H6: -79.81469773093517
+spe_C2H6_ts: -79.81043365138069
+spe_d: 0.00426407955447416
+```
+
+- compare DLPNO-CCSD(T) with m062x
+	- 0.000149688 Hartree
+	- 0.09393 kcal/mol, less than 1 kcal/mol
 
 
 **THE END OF README**
