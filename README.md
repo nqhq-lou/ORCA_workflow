@@ -85,6 +85,9 @@ Also I provided the `qm7_xyz.tar` which consists of 7165 xyz files from QM7 data
     - `.out` files will be placed in `./out` folder
     - Checkout `./logs/failed` file and rerun the failed `.inp` files
 		- based on the `./logs/failed` file, create new thread dir and files and run `start_all_threads.sh` again
+- (If failed, really sorry to hear that)
+	- Just restart from `start_all_threads` script.
+	- The script could identify the finished tasks and skip them.
 - Extract information from `.out` files
     - Using `./notebooks/extract.ipynb`
     - Outputs will be saved in `./notebooks` folder
