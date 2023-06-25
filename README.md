@@ -264,10 +264,10 @@ spe_d: 0.0044315
 - m062x results (by PySCF)
 ```yaml
 mol:
-	atom: C2H6
-	unit: ang
-	basis: def2qzvpp
-	max_memory: 8000
+    atom: C2H6
+    unit: ang
+    basis: def2qzvpp
+    max_memory: 8000
 spe_C2H6: -79.81469773093517
 spe_C2H6_ts: -79.81043365138069
 spe_d: 0.00426407955447416
