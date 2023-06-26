@@ -108,7 +108,7 @@ Also I provided the `qm7_xyz.tar` which consists of 7165 xyz files from QM7 data
     - [ ] Processing `.inp` files
     - [ ] Extracting information from `.out` files
 - [ ] `script/check_thread_duplicate.sh` strategy: newline issue
-
+- [ ] remove `.env`, use `script_root=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)` to load projroot
 
 
 ## Some tips
