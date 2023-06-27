@@ -2,7 +2,7 @@
 # make sure to run at project root
 # input parameters: thread_dname
 
-source .env
+source $(dirname $0)/find_project_root.sh
 cd $PROJECT_ROOT
 
 thread_dname=$1
@@ -25,14 +25,14 @@ fi
 
 # check if folder inp, logs, out, threads exists
 for dname in logs out; do  # inp and threads must exist
-    if [ ! -d ${dname} ]; then
-        mkdir ${dname}
+    if [ ! -d ./${dname} ]; then
+        mkdir ./${dname}
     fi
 done
 
 # check if logs/failed exists
-if [ ! -f logs/failed ]; then
-    touch logs/failed
+if [ ! -f ./logs/failed ]; then
+    touch ./logs/failed
 fi
 
 

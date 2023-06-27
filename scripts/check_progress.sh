@@ -2,7 +2,8 @@
 # purpose: check the progress of the orca workflow
 # output: [number of successful outputs] / [number of total inputs]
 
-source .env
+source $(dirname $0)/find_project_root.sh
+cd $PROJECT_ROOT
 
 # in the `out` folder, there are task folders
 # if the task is finished, then there is a file named `finished` in the task folder

@@ -5,7 +5,8 @@
 # files in threads dir consists of lines, each line for one task name
 # find if there are duplicate tasks in all thread files
 
-source .env
+source $(dirname $0)/find_project_root.sh
+cd $PROJECT_ROOT
 
 thread_dname=$1
 

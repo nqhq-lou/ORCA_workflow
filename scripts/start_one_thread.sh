@@ -4,7 +4,7 @@
 
 thread_name=$1
 
-source .env
+source $(dirname $0)/find_project_root.sh
 cd $PROJECT_ROOT
 
 
