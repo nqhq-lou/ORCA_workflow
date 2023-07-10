@@ -34,7 +34,7 @@ for task_name in $(cat ${thread_fpath}); do
     # check if finished or working
     for status in finished working; do
         if [ -f ${task_root}/${status} ]; then
-            log "Task ${task_name} is ${status}"
+            log "Task ${task_name} is ${status}, skip"
             continue 2  # two levels of loop, use continue 2 to break both
         fi
     done
