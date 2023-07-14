@@ -45,9 +45,9 @@ orca_workflow
 │   ├── check_progress.sh  # check the currect finished / total tasks
 │   ├── check_thread_duplicate.sh  # check if there are duplicate tasks names
 │   ├── find_pids.sh  # find the pids of orca processes and bash control processes
-│   ├── single_run.sh  # start a single calculation
-│   ├── start_one_thread.sh  # start a single thread, which will start single calculations in sequence
-│   ├── start_all_threads.sh  # start multiple threads in parallel
+│   ├── run_one_task.sh  # start a single calculation
+│   ├── run_one_thread.sh  # start a single thread, which will start single calculations in sequence
+│   ├── run_all_threads.sh  # start multiple threads in parallel
 │   └── warn_run_at_PROJECT_ROOT
 ├── threads  # ORCA input files for threads, you could store thread files to othe folders
 │   ├── [thread_name]
@@ -80,13 +80,13 @@ Also I provided the `qm7_xyz.tar` which consists of 7165 xyz files from QM7 data
 - Split `.inp` files for threads and save to `./threads` folder
     - Using `./notebooks/gen_inp.ipynb`
 - Run ORCA calculation controlled by bash scripts
-    - `bash ./script/start_all_threads.sh [thread_dir]`
+    - `bash ./script/run_all_threads.sh [thread_dir]`
         - Make sure that run the script at `PROJECT_ROOT` folder
     - `.out` files will be placed in `./out` folder
     - Checkout `./logs/failed` file and rerun the failed `.inp` files
-		- based on the `./logs/failed` file, create new thread dir and files and run `start_all_threads.sh` again
+		- based on the `./logs/failed` file, create new thread dir and files and run `run_all_threads.sh` again
 - (If failed, really sorry to hear that)
-	- Just restart from `start_all_threads` script.
+	- Just restart from `run_all_threads` script.
 	- The script could identify the finished tasks and skip them.
 - Extract information from `.out` files
     - Using `./notebooks/extract.ipynb`
@@ -99,6 +99,13 @@ Also I provided the `qm7_xyz.tar` which consists of 7165 xyz files from QM7 data
 - `working` indicates the calculation is not finished
 - `finished` indicates the calculation is finished
 - No such files, indicated should restart the calculation (error or interrupted or not started yet)
+
+
+
+## Why jobs failed?
+
+- ORCA error: bad symmetry applied, not reasonable calculation settings.
+- Hardware: not enough RAM.
 
 
 

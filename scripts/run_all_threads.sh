@@ -4,6 +4,7 @@
 
 source $(dirname $0)/find_project_root.sh
 cd $PROJECT_ROOT
+run_one_thread="${PROJECT_ROOT}/scripts/run_one_thread.sh"
 
 thread_dname=$1
 
@@ -30,12 +31,6 @@ for dname in logs out; do  # inp and threads must exist
     fi
 done
 
-# check if logs/failed exists
-if [ ! -f ./logs/failed ]; then
-    touch ./logs/failed
-fi
-
-
 #### start threads ####
 
 # get thread names
@@ -43,8 +38,8 @@ thread_names="$(ls ${thread_dname})"
 
 # start threads, start them on background
 for thread_name in ${thread_names}; do
-    nohup bash ./scripts/start_one_thread.sh ${thread_name} > /dev/null 2>&1 &
-    # bash ./scripts/start_one_thread.sh ${thread_name} &
+    nohup bash ${run_one_thread} ${thread_name} > /dev/null 2>&1 &
+    # bash ./scripts/run_one_thread.sh ${thread_name} &
     echo "Thread ${thread_name} started"
 done
 

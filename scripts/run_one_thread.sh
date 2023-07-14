@@ -1,6 +1,6 @@
 #! /bin/bash
 # start one thread
-# input parameter is：the thread name (like thread_0)
+# input parameter：the thread name (like thread_0)
 
 thread_name=$1
 
@@ -18,13 +18,15 @@ inp_dpath="${PROJECT_ROOT}/inp"
 out_dpath="${PROJECT_ROOT}/out"
 thread_fpath="${PROJECT_ROOT}/threads/${thread_name}"
 logs_fpath="${PROJECT_ROOT}/logs/${thread_name}_${time_stamp}.log"  # log in different files
-failed_fpath="${PROJECT_ROOT}/logs/failed"
-single_run="${PROJECT_ROOT}/scripts/single_run.sh"
+run_one_task="${PROJECT_ROOT}/scripts/run_one_task.sh"
 
 # log function for convenience
 function log {
     echo "[$(date +"${datefmt}")] $1" >> ${logs_fpath}
 }
+
+
+#### run tasks one by one ####
 
 # in the thread file, each line is a tack name
 # iterate over the lines and run each task
@@ -34,21 +36,21 @@ for task_name in $(cat ${thread_fpath}); do
     # check if finished or working
     for status in finished working; do
         if [ -f ${task_root}/${status} ]; then
-            log "Task ${task_name} is ${status}, skip"
+            log "task ${task_name} is ${status}, skip"
             continue 2  # two levels of loop, use continue 2 to break both
         fi
     done
     # check if inp exists
     if [ ! -f ${inp_dpath}/${task_name}.inp ]; then
-        log "Task ${inp_dpath}/${task_name}.inp not found"
+        log "task ${inp_dpath}/${task_name}.inp not found"
         continue
     fi
     # move inp file to out/$task_name folder
     mkdir -p ${task_root}
     cp ${inp_dpath}/${task_name}.inp ${task_root}/
     # run the task
-    log "Task ${task_name} started"
-    bash ${single_run} ${task_name} ${task_root} ${orca_fpath}
+    log "task ${task_name} started"
+    bash ${run_one_task} ${task_name} ${task_root} ${orca_fpath}
     # touch ${task_root}/finished
     # if found finished, log success; else log failed
     if [ -f ${task_root}/finished ]; then
@@ -56,11 +58,6 @@ for task_name in $(cat ${thread_fpath}); do
         continue
     else
         log "Task ${task_name} failed"
-        # if it doesn't exist in failed file, log failed
-        # else do nothing
-        if ! grep -q ${task_name} ${failed_fpath}; then
-            echo ${task_name} >> ${failed_fpath}
-        fi
         continue
     fi
 done

@@ -1,6 +1,6 @@
 #! /bin/bash
 # purpose: run a single task and check if finished
-# input parameters are: task_name, task_root, orca_fpath
+# input parameters: task_name, task_root, orca_fpath
 
 # if finished, then touch finished
 # else, do nothing
@@ -14,7 +14,7 @@ touch working
 
 # check if inp exists
 if [ ! -f "${task_name}.inp" ]; then
-    echo "Task ${task_name}.inp not found"
+    echo "task ${task_name}.inp not found"
     rm working
     exit 1
 fi
