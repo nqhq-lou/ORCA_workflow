@@ -2,7 +2,8 @@
 # start one thread
 # input parameter：the thread name (like thread_0)
 
-thread_name=$1
+thread_dname=$1
+thread_name=$2  # i.e. thread_fname
 
 source $(dirname $0)/find_project_root.sh
 cd $PROJECT_ROOT
@@ -16,7 +17,7 @@ datefmt="%Y-%m-%d_%H:%M:%S_%s.%N"
 time_stamp=$(date +"${datefmt}")
 inp_dpath="${PROJECT_ROOT}/inp"
 out_dpath="${PROJECT_ROOT}/out"
-thread_fpath="${PROJECT_ROOT}/threads/${thread_name}"
+thread_fpath="${PROJECT_ROOT}/${thread_dname}/${thread_name}"
 logs_fpath="${PROJECT_ROOT}/logs/${thread_name}_${time_stamp}.log"  # log in different files
 run_one_task="${PROJECT_ROOT}/scripts/run_one_task.sh"
 

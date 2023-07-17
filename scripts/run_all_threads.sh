@@ -38,7 +38,7 @@ thread_names="$(ls ${thread_dname})"
 
 # start threads, start them on background
 for thread_name in ${thread_names}; do
-    nohup bash ${run_one_thread} ${thread_name} > /dev/null 2>&1 &
+    nohup bash ${run_one_thread} ${thread_dname} ${thread_name} > /dev/null 2>&1 &
     # bash ./scripts/run_one_thread.sh ${thread_name} &
     echo "Thread ${thread_name} started"
 done

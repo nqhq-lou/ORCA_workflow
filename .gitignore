@@ -5,6 +5,7 @@ out/*
 logs/*
 threads/*
 .ipynb_checkpoints
+.vscode
 
 # ignore files
 tree.log
