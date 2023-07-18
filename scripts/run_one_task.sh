@@ -2,6 +2,13 @@
 # purpose: run a single task and check if finished
 # input parameters: task_name, task_root, orca_fpath
 
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    echo "run one orca calculation task"
+    echo "the inp file should be already placed in the task dir [task_root]"
+    echo "usage: $(basename $0) [task_name] [task_root] [orca_fpath]"
+    exit 0
+fi
+
 # if finished, then touch finished
 # else, do nothing
 

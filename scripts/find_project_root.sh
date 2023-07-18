@@ -2,6 +2,13 @@
 # find father dirs where there is .env file
 # add PROJECT_ROOT to env var and source .env
 
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    echo "find project root indicated by .env file and and load the .env file"
+    echo "this script should be placed deeper than project root"
+    echo "usage: $(basename $0)"
+    exit 0
+fi
+
 # get the directory of the script
 dir=$(realpath $(dirname "${BASH_SOURCE[0]}"))
 

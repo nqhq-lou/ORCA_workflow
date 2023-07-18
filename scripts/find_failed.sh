@@ -2,6 +2,12 @@
 # find failed tasks
 # input parameters: none
 
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    echo "find and log all the failed tasks in logs dir"
+    echo "usage: $(basename $0) [log_name(optional)]"
+    exit 0
+fi
+
 source $(dirname $0)/find_project_root.sh
 cd ${PROJECT_ROOT}
 
@@ -10,10 +16,13 @@ cd ${PROJECT_ROOT}
 datefmt="%Y-%m-%d_%H:%M:%S_%s.%N"
 time_stamp=$(date +"${datefmt}")
 out_dpath=${PROJECT_ROOT}/out
-log_fpath="${PROJECT_ROOT}/logs/failed_${time_stamp}.log"
+if [ -z $1 ]; then
+    log_fpath="${PROJECT_ROOT}/logs/failed_${time_stamp}.log"
+else
+    log_fpath="${PROJECT_ROOT}/logs/$1"
+fi
 touch log_fpath
 
-# check if out_dpath exists
 if [ ! -d ${out_dpath} ]; then
     echo "out_dpath=${out_dpath} doesn't exist"
     return 1

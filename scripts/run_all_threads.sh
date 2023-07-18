@@ -2,6 +2,13 @@
 # make sure to run at project root
 # input parameters: thread_dname
 
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    echo "run all threads available in the thread dir (thread_dname)"
+    echo "usage: $(basename $0) [thread_dname]"
+    exit 0
+fi
+
+
 source $(dirname $0)/find_project_root.sh
 cd $PROJECT_ROOT
 run_one_thread="${PROJECT_ROOT}/scripts/run_one_thread.sh"

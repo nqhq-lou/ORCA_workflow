@@ -1,6 +1,12 @@
 #! /bin/bash
 # start one thread
-# input parameter：the thread name (like thread_0)
+# input parameter: thread dir, thread name (like thread_0)
+
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    echo "run one thread based on the thread name (thread_dname) in the thread dir (thread_dname)"
+    echo "usage: $(basename $0) [thread_dname] [thead_name]"
+    exit 0
+fi
 
 thread_dname=$1
 thread_name=$2  # i.e. thread_fname
