@@ -16,6 +16,20 @@
 - I use the name ***thread***, which refers a bash script that will start ORCA calculations in sequence.
     - This might be confusing, and if you have a better name for it, please let me know.
 
+**Important Idea:**
+
+I persuaded myself that spliting tasks into threads cannot make full use of all resources.
+I will migrate to ready-built task managing system like `celery`, `Task Spooler`, and `GNU parallel` in the future.
+Personally and currently I prefer [Task Spooler](https://github.com/justanhduc/task-spooler).
+
+Chat with Copilot chatbot:
+```text
+nqhq-lou:
+Copilot, do you know about any code repo on github that could manage tasks like an HPC with slurm system on a PC? I have many tasks and I want to run them in a row, maximizing the usage of GPU and CPU, so I consider such a task managing code is important.
+
+GitHub Copilot:
+Yes, there are several open-source task management tools available on GitHub that can help you manage tasks on a PC with a slurm system. One such tool is "Task Spooler", which is a Unix batch system where the tasks are submitted to a queue and executed in order. Another tool is "GNU Parallel", which is a command-line tool that can execute multiple jobs in parallel. You can also consider using "Celery", which is a distributed task queue that can be used to distribute tasks across multiple machines.
+```
 
 
 ## file structure
